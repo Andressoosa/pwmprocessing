@@ -1,0 +1,25 @@
+
+const int ENB = 3;      // pin con el que esta ENABLE DEL L298N
+const int IN3 = 5;      // pin con el que esta la entrada l298n  3 
+const int IN4 = 4;      // pin con elq ue esta la entrada digital l298n 4
+void setup()
+{
+  // initialize the serial communication:
+  Serial.begin(9600);
+  // inicia como salida:
+  pinMode (ENB, OUTPUT); 
+  pinMode (IN3, OUTPUT);
+  pinMode (IN4, OUTPUT);
+}
+
+void loop() {
+  byte pwm;
+
+  // check if data has been sent from the computer:
+  if (Serial.available()) {
+    // lee el byte mas reciente  (puede ser de 0 a 255):
+    pwm = Serial.read();
+    // configura la salida con la variable:
+    analogWrite(ENB, pwm);
+  }
+}
